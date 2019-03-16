@@ -12,5 +12,5 @@ I only managed to create project, register myself in labtool and write specifica
 
 Next week I will try to get it going. At the beginnig I will be using Java's ready data structures and just focus on getting first results (map with rooms). After that will be flood fill algorithms turn.  
 
-I didn't come across any problems. The only thing I wasn't sure about was project documentation language. I picked english, but I can change it at any moment if needed.
+I didn't come across any problems. The only thing I wasn't sure about was project documentation language. I picked english, but I can change it at any moment if needed
 
