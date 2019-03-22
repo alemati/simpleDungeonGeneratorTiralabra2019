@@ -2,4 +2,5 @@
 
 [Project specifications](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/specifications.md)  
 
+[Week 2 report](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/weekReports/week2.md)  
 [Week 1 report](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/weekReports/week1.md)
