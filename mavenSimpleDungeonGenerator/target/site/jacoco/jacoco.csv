@@ -1,5 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-mavenSimpleDungeonGenerator,mavensimpledungeongenerator,Room,0,21,0,0,0,8,0,4,0,4
-mavenSimpleDungeonGenerator,mavensimpledungeongenerator,Map,4,252,7,31,2,33,7,16,0,4
-mavenSimpleDungeonGenerator,mavensimpledungeongenerator,SimpleDungeonGenerator,102,0,2,0,22,0,3,0,2,0
-mavenSimpleDungeonGenerator,mavensimpledungeongenerator,Square,0,35,0,0,0,14,0,7,0,7
