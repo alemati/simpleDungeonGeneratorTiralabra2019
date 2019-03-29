@@ -1,6 +1,5 @@
 package mavensimpledungeongenerator;
 
-
 import java.util.Random;
 
 public class Map {
@@ -99,10 +98,11 @@ public class Map {
         }
         return true;
     }
-    
+
     /**
-     * This method finds square on map that is "open" and can be used as wall or room or maze.
-     * 
+     * This method finds square on map that is "open" and can be used as wall or
+     * room or maze.
+     *
      *
      */
     public Square findOpenSquare() {
@@ -115,10 +115,11 @@ public class Map {
         }
         return null;
     }
-    
+
     /**
-     * This method triggers flood fill alghoritm to fill all open space with maze.
-     * 
+     * This method triggers flood fill alghoritm to fill all open space with
+     * maze.
+     *
      *
      */
     public void floodFill() {
@@ -130,10 +131,11 @@ public class Map {
             fill(sq);
         }
     }
-    
+
     /**
-     * This method is floodFill recursive method. It checks if square can be a passageway and it can't, turns it into wall.
-     * 
+     * This method is floodFill recursive method. It checks if square can be a
+     * passageway and it can't, turns it into wall.
+     *
      *
      * @param sq Square
      */
@@ -144,7 +146,7 @@ public class Map {
         }
         if (checkSquareNeighbours(sq)) {
             sq.setStatus("maze");
-            sq.setSymbol(".");
+            sq.setSymbol(" ");
         } else {
             return;
         }
@@ -162,10 +164,10 @@ public class Map {
         surroundSquareByWalls(sq);
     }
 
-    
     /**
-     * This method is implementation of Fisher–Yates shuffle algorithm. Shuffles array
-     * 
+     * This method is implementation of Fisher–Yates shuffle algorithm. Shuffles
+     * array
+     *
      *
      * @param ar Square[]
      */
@@ -179,10 +181,10 @@ public class Map {
             ar[i] = a;
         }
     }
-    
+
     /**
-     * This method surrounds all "open" squares around given square with walls. 
-     * 
+     * This method surrounds all "open" squares around given square with walls.
+     *
      *
      * @param sq Square
      */
@@ -204,11 +206,12 @@ public class Map {
             this.squares[sq.getxHeight()][sq.getyWidth() + 1].setSymbol("#");
         }
     }
-    
+
     /**
-     * This method checks if given square is in touch with maze and returns true if 
-     * it is in touch with only one "maze" square, meaning given square can be a part of maze to.
-     * 
+     * This method checks if given square is in touch with maze and returns true
+     * if it is in touch with only one "maze" square, meaning given square can
+     * be a part of maze to.
+     *
      *
      * @param sq Square
      */
@@ -231,5 +234,50 @@ public class Map {
         }
         return true;
     }
+    
+    public Square findRoomSquare() {
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                if (this.squares[i][j].getStatus().equals("room")) {
+                    return this.squares[i][j];
+                }
+            }
+        }
+        return null;
+    }
+
+//    public Square findRoomSquare() {
+//        for (int i = 0; i < this.height; i++) {
+//            for (int j = 0; j < this.width; j++) {
+//                if (this.squares[i][j].getStatus().equals("room")) {
+//                    return this.squares[i][j];
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+//    public void smallFloodFill() {
+//        Square sq = findRoomSquare();
+//        smallFill(sq);
+//    }
+//
+//    private void smallFill(Square sq) {
+//        if (sq.getxHeight() < 0 || sq.getxHeight() >= this.height
+//                || sq.getyWidth() < 0 || sq.getyWidth() >= this.width || sq.getStatus().equals("wall")) {
+//            return;
+//        }
+//        if (sq.getStatus().equals("room") && sq.getRerion().equals("non")) {
+//            sq.setRegion("main");
+//            sq.setSymbol("€");
+//            System.out.println(sq.getxHeight() + ", " + sq.getyWidth());
+//        }
+//        smallFill(this.squares[sq.getxHeight() + 1][sq.getyWidth()]);
+//        smallFill(this.squares[sq.getxHeight() - 1][sq.getyWidth()]);
+//        smallFill(this.squares[sq.getxHeight()][sq.getyWidth() + 1]);
+//        smallFill(this.squares[sq.getxHeight()][sq.getyWidth() - 1]);
+//    }
+
+    
 
 }

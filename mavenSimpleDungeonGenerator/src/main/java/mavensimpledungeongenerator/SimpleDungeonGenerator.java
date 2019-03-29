@@ -31,7 +31,8 @@ public class SimpleDungeonGenerator {
         }
         
         map.floodFill();
+        
         map.showMap(); // looking at result
     }
-
+    
 }
