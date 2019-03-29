@@ -3,9 +3,7 @@ package mavensimpledungeongenerator;
 
 
 public class Room {
-    private Square[][] squares;
     private Square upLeft;
-    private Square bottomRight;
     private int height;
     private int width;
     

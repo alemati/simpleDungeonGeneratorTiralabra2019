@@ -29,7 +29,8 @@ public class SimpleDungeonGenerator {
                     random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin);
             map.addRoom(room);
         }
-
+        
+        map.floodFill();
         map.showMap(); // looking at result
     }
 

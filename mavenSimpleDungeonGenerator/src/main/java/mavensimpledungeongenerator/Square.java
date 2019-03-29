@@ -7,12 +7,14 @@ public class Square {
     private int yWidth;
     private String status;
     private String symbol;
+    private String region;
     
     public Square(int x, int y) {
         this.xHeight = x;
         this.yWidth = y;
         this.status = "open";
         this.symbol = "░";
+        this.region = "non";
 
     }
     
@@ -30,6 +32,14 @@ public class Square {
     
     public String getSymbol(){
         return this.symbol;
+    }
+    
+    public String getRerion(){
+        return this.region;
+    }
+    
+    public void setRegion(String newRegion){
+        this.region = newRegion;
     }
     
     public void setSymbol(String newSymbol){
