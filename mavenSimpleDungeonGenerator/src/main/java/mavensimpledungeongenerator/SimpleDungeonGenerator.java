@@ -1,5 +1,5 @@
-
 package mavensimpledungeongenerator;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -31,8 +31,10 @@ public class SimpleDungeonGenerator {
         }
         
         map.floodFill();
-        
+        map.removeDeadEnds();
         map.showMap(); // looking at result
+
+        
     }
-    
+
 }
