@@ -35,3 +35,5 @@ This error occurs when program tries to create big map (starting from 200x200) t
 rooms or bunch of very little rooms). In that case flood fill alghoritm has to go deep and sometimes it can be too deep.
 One solution that I can think of is to force flood fill alghoritm to stop going deeper and shut it down. Then start new 
 recursion from where last one ended.
+
+## This document will be supplemented in the future.
