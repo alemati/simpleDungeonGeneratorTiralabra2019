@@ -5,7 +5,7 @@ Week 2 | Hours | Work done
 sum | 12  |      
 
 This week my focus was on connecting rooms with passageway. Core functionality is achived (needs a lot of optimization tho (
-now for instance, doors may appear at rooms corner)).
+now for instance, door may appear at room corner)).
 
 ### Current rusult  
 <img src="https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/mapAfterWeek4.png" width="1000">  
