@@ -29,7 +29,7 @@ using randomized flood fill algorithm and recursion. Randomization is executed i
 array and shuffle it using Fisher–Yates shuffle algorithm and then calls all options in (shuffled) order.  
 
 While passageway grows it creates connections with rooms it encounters. When new passageway square is created, program checks if 
-any of its neighbors is attached to unconnected room. If it finds one, program connects new room to the passageway right away. 
+any of its neighbors is attached to parentRoomSquare which is not yet connected to passageway. If it finds one, program connects new room (parentRoomSquare) to the passageway right away. 
 When there is no empty squares anymore, flood fill algorithm shuts down. At this point we have map with rooms and passageway. 
 
 In the last phase program removes all dead ends from the map replacing them by walls and prints map in the console.
