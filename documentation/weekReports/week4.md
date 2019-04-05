@@ -1,8 +1,8 @@
 Week 2 | Hours | Work done
 ------ | ------| ------
 4.4.19|    5   |connecting rooms and mazes
-5.4.19|    7   |deleting dead ends, documentation
-sum | 12  |      
+5.4.19|    9   |deleting dead ends, documentation
+sum | 14  |      
 
 This week my focus was on connecting rooms with passageway. Core functionality is achived (needs a lot of optimization tho (
 now for instance, door may appear at room corner)).
