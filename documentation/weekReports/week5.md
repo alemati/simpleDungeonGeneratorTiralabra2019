@@ -4,7 +4,7 @@ Week 2 | Hours | Work done
 12.4.19|    5   |iterative flood fill
 sum | 8  |      
 
-After receiving advice, I made iterative flood fill alghoritm and noticed that program doesn't crush anymore. It takes quite 
+After receiving advice, I made iterative flood fill algorithm and noticed that program doesn't crush anymore. It takes quite 
 some time when creating big map, but it works. More info about performance will be added during next week. In order to make 
 iterative version possible I also made myStack (not sure if my version is sensible, gotta check it more carefully next week).
 
