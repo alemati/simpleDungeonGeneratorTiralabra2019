@@ -17,7 +17,7 @@ public class Square {
         this.xHeight = x;
         this.yWidth = y;
         this.status = "open";
-        this.symbol = "░";
+        this.symbol = "#";
         this.region = "non";
         this.parentRoomSq = null;
         this.isParentRoomSq = false;
