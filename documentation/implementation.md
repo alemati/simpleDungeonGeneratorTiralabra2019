@@ -43,7 +43,7 @@ map side size | with removing (ms) | without removing (ms)
 400|5626|89
 500|14418|139 
 
-Clearly, phase of removing dead end needs heavy polishing. Right now it is obivious that time compelxyty is nowhere near O(n) that was suggested at the beggining of the project.
+Clearly, phase of removing dead end needs heavy polishing. Right now it is obivious that time compelxyty is nowhere near O(n) that was suggested at the beginning of the project.
 
 Space complexity on the other hand meets expectation of O(n) where n is total number of squares on map. Program creates only one map and doesn't make any duplicates of it. The most space heavy part of the program is flood fill alghoritm because it uses MyStack and in worst case scenario every square can be pushed into MyStack. But even then it cannot push more then n squares.
 
