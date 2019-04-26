@@ -1,11 +1,9 @@
 ## Test document  
 
 ### Current test coverage
-<img src="https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/testCoverageAfterWeek4.png" width="1000">  
-At this point project is tested only using JUnit tests. Project idea is to create and show a map in console. To test console 
-output I use ByteArrayOutputStream and PrintStream classes.    
-
-   
+Program is tested using JUnit tests.
+<img src="https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/coverageAfterWeek6.png" width="1000">  
+To test console output I use ByteArrayOutputStream and PrintStream classes.
 
 Tests can be performed for instance in a console:
 * download project
@@ -29,11 +27,21 @@ mvn test jacoco:report
 open target/site/jacoco/index.html
 ```
 
+## Empirical testing  
+Program and it's performance was tested empirically. In tests both map height and width parameters where the same (_n_), min room size was about 5% of _n_ and max room size 10% of _n_. Room placing attemps was equal to _n_. 
 
-I have noticed that program can very easily run into java.lang.StackOverflowError, but I think I can recognize the source of the problem. 
-This error occurs when program tries to create big map (starting from 200x200) that has a lot of open space (small number of
-rooms or bunch of very little rooms). In that case flood fill alghoritm has to go deep and sometimes it can be too deep.
-One solution that I can think of is to force flood fill alghoritm to stop going deeper and shut it down. Then start new 
-recursion from where last one ended.
+While testing I have noticed that the most time demanding phase is removing dead ends. Results below show the speed of program with and without removing dead ends.
 
-## This document will be supplemented in the future.
+map side size | with removing (ms) | without removing (ms)
+------ | ------| ------
+50|29|13
+100|73|25
+200|448|43    
+300|1948|68
+400|5626|89
+500|14418|139 
+diagram|![](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/unnamed.png)|![](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/unnamed%20(1).png)   
+
+Clearly, dead ends removing phase needs heavy polishing. Right now it is obivious that time compelxyty is nowhere near O(n) that was suggested at the beginning of the project.
+
+Space complexity on the other hand meets expectation of O(n) where n is total number of squares on map. Program creates only one map and doesn't make any duplicates of it. Part that can demand more space then any other is flood fill alghoritm because it uses MyStack and in worst case scenario every square can be pushed into MyStack. But even then it cannot push more then n squares.
