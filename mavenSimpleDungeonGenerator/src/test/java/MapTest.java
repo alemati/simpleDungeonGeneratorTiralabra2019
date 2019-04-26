@@ -33,20 +33,20 @@ public class MapTest {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Map map = new Map(6, 6);
-        Room room = new Room(new Square(2, 2), 1, 1);
+        Map map = new Map(7, 7);
+        Room room = new Room(new Square(3, 3), 1, 1);
         map.addRoom(room);
         map.floodFill();
-//      after adding a room and maze should looke like that:        
-//      ######
-//      ###+ #
-//      ## # #
-//      #### #
-//      #    #
-//      ######
-
-        map.showMap();
-        assertEquals("######\n###+ #\n## # #\n#### #\n#    #\n######\n", outContent.toString());
+//        #######     
+//        #     #     after floodFilling square 2,2 should be a door
+//        ##+## #     because floodFill starts from 1,1 
+//        # # # #
+//        # ### #
+//        #     #
+//        #######
+        Square[][] squares = map.getMapSquares();
+        String ans = squares[2][2].getSymbol();
+        assertEquals("+", ans);
     }
 
     @Test

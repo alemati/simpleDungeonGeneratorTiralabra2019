@@ -57,7 +57,7 @@ public class Square {
         return "#"; // this one has to be "Open" -> #
     }
     
-    public String getSymbolColored() {
+    public String getColoredSymbol() {
         if (this.status.equals(SquareStatus.Wall)) {
             return RED + "#";
         } else if (this.status.equals(SquareStatus.Maze)) {

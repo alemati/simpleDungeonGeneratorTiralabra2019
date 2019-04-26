@@ -7,7 +7,7 @@ public class SimpleDungeonGenerator {
 
     public static void main(String[] args) {
         Scanner user = new Scanner(System.in);
- 
+
         System.out.println("Hello! Give map parameters:");  // gathering information
         System.out.print("Height: ");
         int mapHeight = Integer.parseInt(user.nextLine());
@@ -35,9 +35,9 @@ public class SimpleDungeonGenerator {
         map.floodFill();
         map.removeDeadEnds();
         long after = System.currentTimeMillis();
-
-        map.showMap(); // looking at result
         System.out.println("Success! Generation time: " + (after - before) + " ms");
+        map.showColoredMap(); // looking at result
+
     }
 
 }

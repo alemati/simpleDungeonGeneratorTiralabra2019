@@ -22,6 +22,9 @@ public class Map {
     public int getMapWidth() {
         return this.width;
     }
+    public Square[][] getMapSquares() {
+        return this.squares;
+    }
 
     /**
      * This method initialize empty map.
@@ -50,7 +53,19 @@ public class Map {
     public void showMap() {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                System.out.print(this.squares[i][j].getSymbolColored());
+                System.out.print(this.squares[i][j].getSymbol());
+            }
+            System.out.println("");
+        }
+    }
+    /**
+     * This method prints dungeon map in console.
+     *
+     */
+    public void showColoredMap() {
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                System.out.print(this.squares[i][j].getColoredSymbol());
             }
             System.out.println("");
         }
