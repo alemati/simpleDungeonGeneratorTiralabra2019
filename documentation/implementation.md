@@ -1,6 +1,5 @@
-### Following document contains general description of the program structure and all implementation steps that were taken during the realization of the program in chronological order.  
+### Following document contains general description of the program structure.  
 
-At this point program isn't yet ready and it's structure may change during next couple of weeks. 
 
 #### General idea  
 
@@ -24,17 +23,32 @@ room data in special data structure. It is just manipulates main "map" in a way 
 which represents all room and contains "room data", and attach all others room squares to this "parent". 
 
 After room addition phase is over, program fills all remaining "open" (non room space) with passageway. Passageway is generated 
-using randomized flood fill algorithm and recursion. Randomization is executed in a next way: in recursion we have 4 options 
-(continue passageway to left/right/up/down) -> to randomize option order in each recursion call program puts all four options in
-array and shuffle it using Fisher–Yates shuffle algorithm and then calls all options in (shuffled) order.  
+using randomized iterative flood fill algorithm. That's how it works: first, we take one square from MyStack. If it can be turned into passageway, program do so. At the same time program checks if this new passageway square is attached to unconnected room and, if that's the case, places door. After that we have 4 options to continue our passageway 
+(continue to left/right/up/down). Program randomizes order of those options using Fisher–Yates shuffle algorithm and pushes them into MyStack and cycle starts from beggining. Flood fill when MyStack becomes empty. At this point we have map with rooms and passageway. 
 
-While passageway grows it creates connections with rooms it encounters. When new passageway square is created, program checks if 
-any of its neighbors is attached to parentRoomSquare which is not yet connected to passageway. If it finds one, program connects new room (parentRoomSquare) to the passageway right away. 
-When there is no empty squares anymore, flood fill algorithm shuts down. At this point we have map with rooms and passageway. 
+In the last phase program removes all dead ends from the map replacing them by walls. Deadend is square that is surrounded by at least 3 walls. After turning deadend to wall program checks all neighbours and if one of them is passageway square, program turns it into wall too. That process continues until there is no deadends anymore. At the end map will be showen in the console.
 
-In the last phase program removes all dead ends from the map replacing them by walls and prints map in the console.
+#### Used alghoritms and data structures  
+Program uses basic arrays and MyStask (selfmade Stack Data Structure). Also randomized iterative flood fill algorithm is used for creating a passageway and Fisher–Yates shuffle alghoritm is used for randomizing squares neighbours while making passageway.
 
-## This document will be supplemented in the future.
+#### Achived time and space complexity 
+While testing I have noticed that the most time demanding phase is removing dead ends. Results below show the speed of program with and without removing dead ends
+
+side size | with removing (ms) | without removing (ms)
+------ | ------| ------
+50|29|13
+100|73|25
+200|448|43    
+300|1948|68
+400|5626|89
+500|14418|139 
+
+Clearly, phase of removing dead end needs heavy polishing. Right now it is obivious that time compelxyty is nowhere near O(n) that was suggested at the beggining of the project.
+
+Space complexity on the other hand meets expectation of O(n) where n is total number of squares on map. Program creates only one map and doesn't make any duplicates of it. The most space heavy part of the program is flood fill alghoritm because it uses MyStack and in worst case scenario every square can be pushed into MyStack. But even then it cannot push more then n squares.
+
+
+
 
 
 
