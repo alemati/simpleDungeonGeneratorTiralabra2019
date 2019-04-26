@@ -14,6 +14,14 @@ public class Map {
         this.squares = new Square[this.height][this.width];
         mapInit();
     }
+    
+    public int getMapHeight() {
+        return this.height;
+    }
+    
+    public int getMapWidth() {
+        return this.width;
+    }
 
     /**
      * This method initialize empty map.
@@ -69,7 +77,6 @@ public class Map {
                         this.squares[i][j].setStatus(SquareStatus.Wall);
                         this.squares[i][j].setParentRoomSq(parentSquare);
                         this.squares[i][j].connectToRoom();
-
                         continue;
                     }
                     // room space
@@ -154,7 +161,7 @@ public class Map {
                 }
 
                 Square[] neighbours = neighbourArray(square);   // pushing all valid neighbour squares into myStack
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 4; i++) {                   // for further passageway
                     if (neighbours[i] != null) {
                         myStack.push(neighbours[i]);
                     }
