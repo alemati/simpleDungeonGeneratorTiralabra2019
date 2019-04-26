@@ -1,95 +1,113 @@
-
 package mavensimpledungeongenerator;
 
+enum SquareStatus {
+    Wall, Room, Open, Maze, Door;
+}
+
 public class Square {
-    
-    private int xHeight;
-    private int yWidth;
-    private String status;
-    private String symbol;
-    private String region;
+
+    /*Strings to desplay colors*/
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+
+    private int HeightX;
+    private int WidthY;
+    private Boolean isConnected;
     private Square parentRoomSq;
     private Boolean isParentRoomSq;
-    private Boolean isDoor;
     private Boolean partOfRoom;
-    
+
+    private SquareStatus status;
+
     public Square(int x, int y) {
-        this.xHeight = x;
-        this.yWidth = y;
-        this.status = "open";
-        this.symbol = "#";
-        this.region = "non";
+        this.HeightX = x;
+        this.WidthY = y;
+        this.status = SquareStatus.Open;
         this.parentRoomSq = null;
+        this.isConnected = false;
         this.isParentRoomSq = false;
         this.partOfRoom = false;
-        this.isDoor = false;
     }
-    public void setAsNotAPartOfRoom() {
-        this.partOfRoom = false;
-        this.parentRoomSq = null;
+
+    public void setStatus(SquareStatus sqSt) {
+        this.status = sqSt;
     }
-    public void setAsPartOfRoom() {
+
+    public SquareStatus getStatus() {
+        return this.status;
+    }
+
+    public String getSymbol() {
+        if (this.status.equals(SquareStatus.Wall)) {
+            return "#";
+        } else if (this.status.equals(SquareStatus.Maze)) {
+            return " ";
+        } else if (this.status.equals(SquareStatus.Door)) {
+            return "+";
+        } else if (this.status.equals(SquareStatus.Room)) {
+            return " ";
+        }
+        return "#"; // this one has to be "Open" -> #
+    }
+    
+    public String getSymbolColored() {
+        if (this.status.equals(SquareStatus.Wall)) {
+            return RED + "#";
+        } else if (this.status.equals(SquareStatus.Maze)) {
+            return GREEN + " ";
+        } else if (this.status.equals(SquareStatus.Door)) {
+            return GREEN + "+";
+        } else if (this.status.equals(SquareStatus.Room)) {
+            return GREEN + " ";
+        }
+        return BLACK + "#"; // this one has to be "Open" -> #
+    }
+
+    public boolean isConnectedToMaze() {
+        return this.isConnected;
+    }
+
+    public void connectToMaze() {
+        this.isConnected = true;
+    }
+
+    public void connectToRoom() {
         this.partOfRoom = true;
     }
-    public boolean getIsPartOfRoomOrNot() {
+
+    public boolean isPartOfRoom() {
         return this.partOfRoom;
     }
-    
-    public void setToBeDoor() {
-        this.isDoor = true;
-        this.symbol = "+";
-    }
-    
+
     public void setParentRoomSq(Square parentSq) {
         this.parentRoomSq = parentSq;
-        
     }
-    
+
     public Square getParentRoomSq() {
         return this.parentRoomSq;
     }
-    
+
     public void setToBeParentRoomSq() {
         this.isParentRoomSq = true;
     }
-    
+
     public boolean isParentRoomSq() {
         return this.isParentRoomSq;
     }
-    
-    public int getxHeight(){
-        return this.xHeight;
+
+    public int getHeightX() {
+        return this.HeightX;
     }
-    
-    public boolean getIsDoor(){
-        return this.isDoor;
+
+    public int getWidthY() {
+        return this.WidthY;
     }
-    
-    public int getyWidth(){
-        return this.yWidth;
-    }
-    
-    public String getStatus(){
-        return this.status;
-    }
-    
-    public String getSymbol(){
-        return this.symbol;
-    }
-    
-    public String getRerion(){
-        return this.region;
-    }
-    
-    public void setRegion(String newRegion){
-        this.region = newRegion;
-    }
-    
-    public void setSymbol(String newSymbol){
-        this.symbol = newSymbol;
-    }
-    
-    public void setStatus(String newStatus){
-        this.status = newStatus;
-    }
+
 }

@@ -4,13 +4,13 @@ package mavensimpledungeongenerator;
  * Selfmade Stack.
  *
  */
-public class StackSM {
+public class MyStack {
 
     private Object[] spots;
     private int indexOfLastObject;
     private int size;
 
-    public StackSM() {
+    public MyStack() {
         this.spots = new Object[10];
         this.size = 10;
         this.indexOfLastObject = -1;

@@ -1,20 +1,19 @@
-
 package mavensimpledungeongenerator;
 
-
 public class Room {
-    private Square upLeft;
+    
+    private Square parentSquare;
     private int height;
     private int width;
     
-    public Room(Square upLeft, int height, int width) { 
-        this.upLeft = upLeft;                           
+    public Room(Square parentSquare, int height, int width) { 
+        this.parentSquare = parentSquare;                           
         this.height = height;
         this.width = width;
     }
     
-    public Square getUpLeft() {
-        return this.upLeft;
+    public Square getParentSquare() {
+        return this.parentSquare;
     }
 
     public int getHeight() {

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class SimpleDungeonGenerator {
 
     public static void main(String[] args) {
-        
+
         Scanner user = new Scanner(System.in);
         System.out.println("Hello! Give map parameters:");  // gathering information
         System.out.print("Height: ");
@@ -19,8 +19,7 @@ public class SimpleDungeonGenerator {
         int roomSizeMax = Integer.parseInt(user.nextLine());
         System.out.print("Room placing attemps: ");
         int placeAttemps = Integer.parseInt(user.nextLine());
-        
-        
+
         long before = System.currentTimeMillis();
         Map map = new Map(mapHeight, mapWidth); // initialization of empty map
 
@@ -32,14 +31,14 @@ public class SimpleDungeonGenerator {
                     random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin);
             map.addRoom(room);
         }
-        
+
         map.floodFill();
         map.removeDeadEnds();
         long after = System.currentTimeMillis();
 
         map.showMap(); // looking at result
         System.out.println("Success! Generation time: " + (after - before) + " ms");
-        
+
     }
 
 }
