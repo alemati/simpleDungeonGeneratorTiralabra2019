@@ -7,21 +7,26 @@ public class Map {
     private int width;
     private int height;
     private Square[][] squares;
+    private MyStack deadEnds;
+    private int roomsPlaced;
 
     public Map(int height, int width) {
         this.height = height;
         this.width = width;
         this.squares = new Square[this.height][this.width];
+        this.deadEnds = new MyStack();
+        this.roomsPlaced = 0;
         mapInit();
     }
-    
+
     public int getMapHeight() {
         return this.height;
     }
-    
+
     public int getMapWidth() {
         return this.width;
     }
+
     public Square[][] getMapSquares() {
         return this.squares;
     }
@@ -58,8 +63,9 @@ public class Map {
             System.out.println("");
         }
     }
+
     /**
-     * This method prints dungeon map in console.
+     * This method prints colored dungeon map in console.
      *
      */
     public void showColoredMap() {
@@ -80,15 +86,14 @@ public class Map {
     public void addRoom(Room room) {
         if (checkAreaForRoom(room)) {
             Square parentSquare = room.getParentSquare();
-            
+            this.roomsPlaced++;
             for (int i = room.getParentSquare().getHeightX() - 1; i < (room.getParentSquare().getHeightX() + room.getHeight()) + 1; i++) {
                 for (int j = room.getParentSquare().getWidthY() - 1; j < (room.getParentSquare().getWidthY() + room.getWidth()) + 1; j++) {
-
-                    if (i == room.getParentSquare().getHeightX() - 1 // borders
-                            || j == room.getParentSquare().getWidthY() - 1
-                            || i == (room.getParentSquare().getHeightX() + room.getHeight())
-                            || j == (room.getParentSquare().getWidthY() + room.getWidth())) {
-
+                    if (squareIsOnRoomBorder(room, this.squares[i][j])) {           // room borders
+                        if (squareIsOnRoomAngle(room, this.squares[i][j])) {        // room angle -> can't be a door 
+                            this.squares[i][j].setStatus(SquareStatus.Wall);        // -> is not a part of the room
+                            continue;
+                        }
                         this.squares[i][j].setStatus(SquareStatus.Wall);
                         this.squares[i][j].setParentRoomSq(parentSquare);
                         this.squares[i][j].connectToRoom();
@@ -124,8 +129,55 @@ public class Map {
     }
 
     /**
-     * This method finds square on map that is "open" and can be used as
-     * wall/room/maze.
+     * This method checks if given square is on room border.
+     *
+     *
+     * @param room Room
+     * @param sq Square
+     */
+    public boolean squareIsOnRoomBorder(Room room, Square sq) {
+        int i = sq.getHeightX();
+        int j = sq.getWidthY();
+        if (i == room.getParentSquare().getHeightX() - 1
+                || j == room.getParentSquare().getWidthY() - 1
+                || i == (room.getParentSquare().getHeightX() + room.getHeight())
+                || j == (room.getParentSquare().getWidthY() + room.getWidth())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks if given square is on room angle.
+     *
+     *
+     * @param room Room
+     * @param sq Square
+     */
+    public boolean squareIsOnRoomAngle(Room room, Square sq) {
+        int i = sq.getHeightX();
+        int j = sq.getWidthY();
+        if (i == room.getParentSquare().getHeightX() - 1 && j == room.getParentSquare().getWidthY() - 1) {
+            this.squares[i][j].setStatus(SquareStatus.Wall);
+            return true;
+        }
+        if (i == room.getParentSquare().getHeightX() - 1 && j == room.getParentSquare().getWidthY() + room.getWidth()) {
+            this.squares[i][j].setStatus(SquareStatus.Wall);
+            return true;
+        }
+        if (i == room.getParentSquare().getHeightX() + room.getHeight() && j == room.getParentSquare().getWidthY() - 1) {
+            this.squares[i][j].setStatus(SquareStatus.Wall);
+            return true;
+        }
+        if (i == room.getParentSquare().getHeightX() + room.getHeight() && j == room.getParentSquare().getWidthY() + room.getWidth()) {
+            this.squares[i][j].setStatus(SquareStatus.Wall);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method finds "open" square that can be used as wall/room/maze.
      *
      *
      */
@@ -147,6 +199,12 @@ public class Map {
      */
     public void floodFill() {
         Square sq = findOpenSquare();
+        if (!this.squares[sq.getHeightX() + 1][sq.getWidthY()].isPartOfRoom() // check if first square will be a deadend
+                && !this.squares[sq.getHeightX() - 1][sq.getWidthY()].isPartOfRoom()
+                && !this.squares[sq.getHeightX()][sq.getWidthY() + 1].isPartOfRoom()
+                && !this.squares[sq.getHeightX()][sq.getWidthY() - 1].isPartOfRoom()) {
+            this.deadEnds.push(sq);
+        }
         if (sq != null) {
             iterativeFloodFill(sq);
         }
@@ -168,11 +226,15 @@ public class Map {
             if (canBeAPartOfPassageway(square)) {
                 square.setStatus(SquareStatus.Maze);
 
-                Square neighbour = couldBeADoor(square);    // check if door can be placed nearby
-                if (neighbour != null) {
-                    Square parent = neighbour.getParentRoomSq();
+                Square doorSquare = couldBeADoor(square);    // check if door can be placed nearby
+                if (doorSquare != null) {
+                    Square parent = doorSquare.getParentRoomSq();
                     parent.connectToMaze();
-                    neighbour.setStatus(SquareStatus.Door);
+                    doorSquare.setStatus(SquareStatus.Door);
+                }
+
+                if (willBeADeadEnd(square)) {
+                    this.deadEnds.push(square);
                 }
 
                 Square[] neighbours = neighbourArray(square);   // pushing all valid neighbour squares into myStack
@@ -308,45 +370,6 @@ public class Map {
     }
 
     /**
-     * This method removes all dead ends. Dead end is a passageway squares that
-     * are not a part of any room and is in touch with 3 or 4 walls.
-     *
-     *
-     */
-    public void removeDeadEnds() {
-        Square deadEnd = findDeadEnd();
-        while (deadEnd != null) {
-            while (deadEnd != null) {
-                if (!squareIsDeadEnd(deadEnd)) {
-                    break;
-                }
-                deadEnd.setStatus(SquareStatus.Open);
-                Square previousSq = previousSquareInPassageway(deadEnd);
-                deadEnd = previousSq;
-            }
-            deadEnd = findDeadEnd();
-        }
-
-    }
-
-    /**
-     * This method finds a dead end square. Dead end is a passagewat square
-     * which is surrounded by at least 3 walls.
-     *
-     *
-     */
-    public Square findDeadEnd() {
-        for (int i = 0; i < this.height; i++) {
-            for (int j = 0; j < this.width; j++) {
-                if (this.squares[i][j].getStatus().equals(SquareStatus.Maze) && squareIsDeadEnd(this.squares[i][j])) {
-                    return this.squares[i][j];
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
      * This method checks all neighbour squares of given passageway square and
      * if one of them is a part of passageway, method returns it.
      *
@@ -397,6 +420,148 @@ public class Map {
             if (n >= 3) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * This method tells if given passageway square is going to be a deadend.
+     *
+     *
+     *
+     * @param sq Square
+     */
+    public boolean willBeADeadEnd(Square sq) {
+        int n = 0;
+        if (canBeAPartOfPassageway(this.squares[sq.getHeightX() + 1][sq.getWidthY()])) {
+            n++;
+        } else if (canBeAPartOfPassageway(this.squares[sq.getHeightX() - 1][sq.getWidthY()])) {
+            n++;
+        } else if (canBeAPartOfPassageway(this.squares[sq.getHeightX()][sq.getWidthY() + 1])) {
+            n++;
+        } else if (canBeAPartOfPassageway(this.squares[sq.getHeightX()][sq.getWidthY() - 1])) {
+            n++;
+        }
+        if (n > 0) {
+            return false;
+        }
+        if (isInTouchWithDoor(sq)) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * This method checks if square is in touch with door.
+     *
+     *
+     *
+     * @param sq Square
+     */
+    public boolean isInTouchWithDoor(Square sq) {
+        if (sq.getHeightX() >= 1 && sq.getHeightX() <= this.height - 1
+                && sq.getWidthY() >= 1 && sq.getWidthY() <= this.width - 1) {
+            if (this.squares[sq.getHeightX() + 1][sq.getWidthY()].getSymbol().equals("+")) {
+                return true;
+            }
+            if (this.squares[sq.getHeightX() - 1][sq.getWidthY()].getSymbol().equals("+")) {
+                return true;
+            }
+            if (this.squares[sq.getHeightX()][sq.getWidthY() + 1].getSymbol().equals("+")) {
+                return true;
+            }
+            if (this.squares[sq.getHeightX()][sq.getWidthY() - 1].getSymbol().equals("+")) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * This method removes all deadends. Deadend is a passageway squares that
+     * are not a part of any room and is in touch with 3 or 4 walls.
+     *
+     *
+     */
+    public void removeDeadEnds() {
+        while (!this.deadEnds.isEmpty()) {
+            Square deadEnd = (Square) this.deadEnds.pop();
+
+            while (true) {
+                if (deadEnd == null) {
+                    break;
+                }
+                deadEnd.setStatus(SquareStatus.Open);
+                Square previousSq = previousSquareInPassageway(deadEnd);
+                if (squareIsDeadEnd(previousSq)) {
+                    deadEnd = previousSq;
+                    continue;
+                }
+                deadEnd = null;
+            }
+        }
+    }
+
+    /**
+     * This method checks all rooms on map are connected to each other.
+     *
+     *
+     */
+    public void allRoomsAreConnected() {
+        int roomCount = 0;
+        MyStack myStack = new MyStack();
+        Square sq = findMazeOrRoomSquare();
+        if (sq != null) {
+            myStack.push(sq);
+            while (!myStack.isEmpty()) {
+                Square square = (Square) myStack.pop();
+                if (!square.isChecked()) {
+                    if (square.isParentRoomSq()) {
+                        roomCount++;
+                    }
+                }
+                square.setChecked();
+                Square[] neighbours = neighbourArray(square);
+                for (int i = 0; i < 4; i++) {
+                    if (valid(neighbours[i])) {
+                        myStack.push(neighbours[i]);
+                    }
+                }
+            }
+            System.out.println("Placed: " + this.roomsPlaced + ", connected: " + roomCount);
+        }
+
+    }
+
+    /**
+     * This method finds square on map that is "open" and can be used as
+     * wall/room/maze.
+     *
+     *
+     */
+    public Square findMazeOrRoomSquare() {
+        for (int i = 1; i < this.height; i++) {
+            for (int j = 1; j < this.width; j++) {
+                if (this.squares[i][j].getStatus().equals(SquareStatus.Maze)) {
+                    return this.squares[i][j];
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method insures that given square can be a part of passageway.
+     *
+     *
+     * @param sq Square
+     */
+    public boolean valid(Square sq) {
+        if (sq != null && !sq.isChecked() && (sq.getStatus().equals(SquareStatus.Maze)
+                || sq.getStatus().equals(SquareStatus.Room)
+                || sq.getStatus().equals(SquareStatus.Door))) {
+            return true;
         }
         return false;
     }

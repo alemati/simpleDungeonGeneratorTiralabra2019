@@ -23,6 +23,7 @@ public class Square {
     private Square parentRoomSq;
     private Boolean isParentRoomSq;
     private Boolean partOfRoom;
+    private Boolean checked;
 
     private SquareStatus status;
 
@@ -34,8 +35,17 @@ public class Square {
         this.isConnected = false;
         this.isParentRoomSq = false;
         this.partOfRoom = false;
+        this.checked = false;
     }
-
+    
+    public void setChecked() {
+        this.checked = true;
+    }
+    
+    public boolean isChecked() {
+        return this.checked;
+    }
+    
     public void setStatus(SquareStatus sqSt) {
         this.status = sqSt;
     }
@@ -58,6 +68,9 @@ public class Square {
     }
     
     public String getColoredSymbol() {
+        if (this.isParentRoomSq == true && this.checked == false) {
+            return "█";
+        }
         if (this.status.equals(SquareStatus.Wall)) {
             return RED + "#";
         } else if (this.status.equals(SquareStatus.Maze)) {

@@ -34,6 +34,9 @@ public class SimpleDungeonGenerator {
 
         map.floodFill();
         map.removeDeadEnds();
+        
+        
+        map.allRoomsAreConnected();
         long after = System.currentTimeMillis();
         System.out.println("Success! Generation time: " + (after - before) + " ms");
         map.showColoredMap(); // looking at result
