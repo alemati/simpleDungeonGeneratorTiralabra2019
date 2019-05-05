@@ -494,7 +494,7 @@ public class Map {
                 }
                 deadEnd.setStatus(SquareStatus.Open);
                 Square previousSq = previousSquareInPassageway(deadEnd);
-                if (squareIsDeadEnd(previousSq)) {
+                if (previousSq != null && squareIsDeadEnd(previousSq)) {
                     deadEnd = previousSq;
                     continue;
                 }
@@ -504,11 +504,11 @@ public class Map {
     }
 
     /**
-     * This method checks all rooms on map are connected to each other.
+     * This method tells how many rooms there is on created map and how many of them are connected to passageway.
      *
      *
      */
-    public void allRoomsAreConnected() {
+    public void numberOfSuccessfullyConnectedRooms() {
         int roomCount = 0;
         MyStack myStack = new MyStack();
         Square sq = findMazeOrRoomSquare();
@@ -516,7 +516,7 @@ public class Map {
             myStack.push(sq);
             while (!myStack.isEmpty()) {
                 Square square = (Square) myStack.pop();
-                if (!square.isChecked()) {
+                if (!square.getChecked()) {
                     if (square.isParentRoomSq()) {
                         roomCount++;
                     }
@@ -529,7 +529,7 @@ public class Map {
                     }
                 }
             }
-            System.out.println("Placed: " + this.roomsPlaced + ", connected: " + roomCount);
+            System.out.println("Rooms placed: " + this.roomsPlaced + ", and connected: " + roomCount + ", ");
         }
 
     }
@@ -550,6 +550,23 @@ public class Map {
         }
         return null;
     }
+    
+//    /**
+//     * This method tries to find dead end.
+//     * 
+//     *
+//     *
+//     */
+//    public Square findDeadEnd() {
+//        for (int i = 1; i < this.height; i++) {
+//            for (int j = 1; j < this.width; j++) {
+//                if (squareIsDeadEnd(this.squares[i][j])) {
+//                    return this.squares[i][j];
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     /**
      * This method insures that given square can be a part of passageway.
@@ -558,7 +575,7 @@ public class Map {
      * @param sq Square
      */
     public boolean valid(Square sq) {
-        if (sq != null && !sq.isChecked() && (sq.getStatus().equals(SquareStatus.Maze)
+        if (sq != null && !sq.getChecked() && (sq.getStatus().equals(SquareStatus.Maze)
                 || sq.getStatus().equals(SquareStatus.Room)
                 || sq.getStatus().equals(SquareStatus.Door))) {
             return true;

@@ -42,7 +42,7 @@ public class Square {
         this.checked = true;
     }
     
-    public boolean isChecked() {
+    public boolean getChecked() {
         return this.checked;
     }
     

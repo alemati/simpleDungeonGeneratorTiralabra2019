@@ -58,7 +58,12 @@ public class MyStack {
         }
         this.spots = newSpots;
     }
-
+    
+    /**
+     * This method tells if myStack is empty.
+     * 
+     *
+     */
     public boolean isEmpty() {
         if (this.indexOfLastObject == -1) {
             return true;
