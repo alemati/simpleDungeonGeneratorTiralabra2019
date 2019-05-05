@@ -7,6 +7,7 @@ public class SimpleDungeonGenerator {
 
     public static void main(String[] args) {
         
+     
         Scanner user = new Scanner(System.in);
         System.out.println("Hello! Give map parameters:");  // gathering information
         System.out.print("Height: ");
@@ -48,8 +49,10 @@ public class SimpleDungeonGenerator {
         }
         map.floodFill();
         map.removeDeadEnds();
-        map.numberOfSuccessfullyConnectedRooms();
+        int roomsPlaced = map.getMapRoomsPlaced();
+        int connectedRooms = map.numberOfSuccessfullyConnectedRooms();
         long after = System.currentTimeMillis();
+        System.out.println("Rooms placed: " +  roomsPlaced + ", " + "and connected: " + connectedRooms);
         System.out.println("Generation time was: " + (after - before) + " ms");
         map.showMap();
     }
@@ -76,8 +79,10 @@ public class SimpleDungeonGenerator {
         }
         map.floodFill();
         map.removeDeadEnds();
-        map.numberOfSuccessfullyConnectedRooms();
+        int roomsPlaced = map.getMapRoomsPlaced();
+        int connectedRooms = map.numberOfSuccessfullyConnectedRooms();
         long after = System.currentTimeMillis();
+        System.out.println("Rooms placed: " +  roomsPlaced + ", " + "and connected: " + connectedRooms);
         System.out.println("Generation time was: " + (after - before) + " ms");
         map.showMap();
     }

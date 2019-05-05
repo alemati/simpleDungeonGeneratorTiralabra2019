@@ -18,6 +18,10 @@ public class Map {
         this.roomsPlaced = 0;
         mapInit();
     }
+    
+    public int getMapRoomsPlaced() {
+        return this.roomsPlaced;
+    }
 
     public int getMapHeight() {
         return this.height;
@@ -508,7 +512,7 @@ public class Map {
      *
      *
      */
-    public void numberOfSuccessfullyConnectedRooms() {
+    public int numberOfSuccessfullyConnectedRooms() {
         int roomCount = 0;
         MyStack myStack = new MyStack();
         Square sq = findMazeOrRoomSquare();
@@ -529,9 +533,9 @@ public class Map {
                     }
                 }
             }
-            System.out.println("Rooms placed: " + this.roomsPlaced + ", and connected: " + roomCount + ", ");
+            return roomCount;
         }
-
+        return 0;
     }
 
     /**
@@ -550,23 +554,6 @@ public class Map {
         }
         return null;
     }
-    
-//    /**
-//     * This method tries to find dead end.
-//     * 
-//     *
-//     *
-//     */
-//    public Square findDeadEnd() {
-//        for (int i = 1; i < this.height; i++) {
-//            for (int j = 1; j < this.width; j++) {
-//                if (squareIsDeadEnd(this.squares[i][j])) {
-//                    return this.squares[i][j];
-//                }
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * This method insures that given square can be a part of passageway.

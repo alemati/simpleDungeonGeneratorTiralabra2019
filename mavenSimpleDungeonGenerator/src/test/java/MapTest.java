@@ -76,18 +76,37 @@ public class MapTest {
         assertEquals(true, answer);
     }
 
-//    @Test
-//    public void testRemoveDeadEnd() {
-//        Map map = new Map(8, 8);
-//        Room room = new Room(new Square(3, 3), 1, 1);
-//        map.addRoom(room);
-//        Room room2 = new Room(new Square(5, 5), 1, 1);
-//        map.addRoom(room2);
-//        map.floodFill();
-//        map.removeDeadEnds();
-//        Square deadEnd = map.findDeadEnd(); //after removing all dead ends this should be null
-//        assertEquals(null, deadEnd);
-//
-//    }
+    @Test
+    public void testRemoveDeadEnd() {
+        Map map = new Map(8, 8);
+        map.floodFill();
+        map.removeDeadEnds();                       // after removing dead ends there shouldn't be any maze
+        Square[][] squares = map.getMapSquares();
+        Square deadEnd = null;
+        for (int i =  2; i < map.getMapHeight() - 1; i++) {
+            for (int j = 2; j < map.getMapWidth() - 1; j++) {
+                if (!squares[i][j].getSymbol().equals("#")) {
+                    deadEnd = squares[i][j];
+                }
+            }
+        }
+        assertEquals(null, deadEnd);
+    }
+    
+    @Test
+    public void testConnectedRoomCount() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        
+        Map map = new Map(15, 15);
+        Room room = new Room(new Square(4, 4), 1, 1);
+        map.addRoom(room);
+        Room room2 = new Room(new Square(10, 10), 1, 1);
+        map.addRoom(room2);
+        map.floodFill();
+        map.removeDeadEnds();
+        int answer = map.numberOfSuccessfullyConnectedRooms();
+        assertEquals(2, answer);
+    }
 
 }
