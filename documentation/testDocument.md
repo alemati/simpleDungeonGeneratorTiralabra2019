@@ -2,7 +2,7 @@
 
 ### Current test coverage
 Program is tested using JUnit tests.
-<img src="https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/coverageAfterWeek6.png" width="1000">  
+<img src="https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/testsAfterWeek7.png" width="1000">  
 To test console output I use ByteArrayOutputStream and PrintStream classes.
 
 Tests can be performed for instance in a console:
