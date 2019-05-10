@@ -11,8 +11,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ *
+ * @author AM
+ */
 public class MapTest {
 
+    /**
+     *
+     */
     @Test
     public void testMapShow() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -27,7 +34,9 @@ public class MapTest {
         assertEquals("###\n###\n###\n", outContent.toString());
     }
 
-
+    /**
+     *
+     */
     @Test
     public void testRoomAndMazeAdded() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -65,6 +74,9 @@ public class MapTest {
         
     }
 
+    /**
+     *
+     */
     @Test
     public void testDeadEndCheck() {
         Map map = new Map(3, 3);
@@ -76,6 +88,9 @@ public class MapTest {
         assertEquals(true, answer);
     }
     
+    /**
+     *
+     */
     @Test
     public void testNoRoomPlaced() {
         Map map = new Map(5, 5);
@@ -85,6 +100,9 @@ public class MapTest {
         assertEquals(0, ans);
     }
 
+    /**
+     *
+     */
     @Test
     public void testRemoveDeadEnd() {
         Map map = new Map(8, 8);
@@ -102,6 +120,9 @@ public class MapTest {
         assertEquals(null, deadEnd);
     }
     
+    /**
+     *
+     */
     @Test
     public void testConnectedRoomCount() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

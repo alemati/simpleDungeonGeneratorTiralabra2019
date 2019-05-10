@@ -13,7 +13,9 @@ public class MyRandom {
     long increment;
     long mod;
 
-    
+    /**
+     *
+     */
     public MyRandom() {
         this.mod = 2147483647;
         this.mod++;
@@ -26,6 +28,7 @@ public class MyRandom {
      * This method returns random positive number.
      *
      * 
+     * @return 
      */
     public int nextInt() {
         seed = (seed * multiplier + increment) % mod;
@@ -37,6 +40,7 @@ public class MyRandom {
      *
      * 
      * @param max int
+     * @return 
      */
     public int nextInt(int max) {
         if (max <= 0) {
@@ -45,6 +49,10 @@ public class MyRandom {
         return (int) (nextInt() % max);
     }
 
+    /**
+     *
+     * @return
+     */
     public long getSeed() {
         return seed;
     }

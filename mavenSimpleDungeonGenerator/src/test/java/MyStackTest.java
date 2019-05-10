@@ -3,8 +3,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import mavensimpledungeongenerator.MyStack;
 
+/**
+ *
+ * @author AM
+ */
 public class MyStackTest {
     
+    /**
+     *
+     */
     @Test
     public void testPushAndPop() {             
         MyStack myStack = new MyStack();
@@ -16,6 +23,9 @@ public class MyStackTest {
         assertEquals(number2, ans);
     }
     
+    /**
+     *
+     */
     @Test
     public void testNotEmpty() {             
         MyStack myStack = new MyStack();
@@ -25,6 +35,9 @@ public class MyStackTest {
         assertEquals(false, isEmpty);
     }
     
+    /**
+     *
+     */
     @Test
     public void testIsEmpty() {             
         MyStack myStack = new MyStack();
@@ -32,6 +45,9 @@ public class MyStackTest {
         assertEquals(true, isEmpty);
     }
     
+    /**
+     *
+     */
     @Test
     public void testSizeGrows() {    
         // stacks default size is 10

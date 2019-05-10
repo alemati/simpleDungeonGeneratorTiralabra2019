@@ -4,8 +4,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ *
+ * @author AM
+ */
 public class MyRandomTest {
     
+    /**
+     *
+     */
     @Test
     public void testRandomNumber() {             
         MyRandom myRandom = new MyRandom();
@@ -17,6 +24,9 @@ public class MyRandomTest {
         assertEquals(true, ans);
     }
     
+    /**
+     *
+     */
     @Test
     public void testRandomNumberWithUpperBoundary() {             
         MyRandom myRandom = new MyRandom();

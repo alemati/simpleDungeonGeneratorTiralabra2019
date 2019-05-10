@@ -10,6 +10,9 @@ public class MyStack {
     private int indexOfLastObject;
     private int size;
 
+    /**
+     *
+     */
     public MyStack() {
         this.spots = new Object[10];
         this.size = 10;
@@ -19,6 +22,7 @@ public class MyStack {
     /**
      * Returns last object from the stack.
      *
+     * @return 
      */
     public Object pop() {
         if (this.indexOfLastObject >= 0) {
@@ -63,6 +67,7 @@ public class MyStack {
      * This method tells if myStack is empty.
      * 
      *
+     * @return 
      */
     public boolean isEmpty() {
         if (this.indexOfLastObject == -1) {

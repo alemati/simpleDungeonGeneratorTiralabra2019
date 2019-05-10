@@ -1,5 +1,9 @@
 package mavensimpledungeongenerator;
 
+/**
+ *
+ * @author AM
+ */
 public class Map {
 
     private int width;
@@ -8,6 +12,11 @@ public class Map {
     private MyStack deadEnds;
     private int roomsPlaced;
 
+    /**
+     *
+     * @param height
+     * @param width
+     */
     public Map(int height, int width) {
         this.height = height;
         this.width = width;
@@ -17,18 +26,34 @@ public class Map {
         mapInit();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMapRoomsPlaced() {
         return this.roomsPlaced;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMapHeight() {
         return this.height;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMapWidth() {
         return this.width;
     }
 
+    /**
+     *
+     * @return
+     */
     public Square[][] getMapSquares() {
         return this.squares;
     }
@@ -103,6 +128,7 @@ public class Map {
      *
      *
      * @param room Room
+     * @return 
      */
     public boolean checkAreaForRoom(Room room) {
         for (int i = room.getParentSquare().getHeightX() - 2; i < (room.getParentSquare().getHeightX() + room.getHeight() + 2); i++) {
@@ -123,6 +149,7 @@ public class Map {
      *
      * @param room Room
      * @param sq Square
+     * @return 
      */
     public boolean squareIsOnRoomBorder(Room room, Square sq) {
         int i = sq.getHeightX();
@@ -142,6 +169,7 @@ public class Map {
      *
      * @param room Room
      * @param sq Square
+     * @return 
      */
     public boolean squareIsOnRoomAngle(Room room, Square sq) {
         int i = sq.getHeightX();
@@ -169,6 +197,7 @@ public class Map {
      * This method finds "open" square that can be used as wall/room/maze.
      *
      *
+     * @return 
      */
     public Square findOpenSquare() {
         for (int i = 1; i < this.height; i++) {
@@ -241,7 +270,8 @@ public class Map {
      * This method returns array that contains neighbours of given square.
      *
      *
-     * @param sq Square
+     * @param square
+     * @return 
      */
     public Square[] neighbourArray(Square square) {
         Square[] neighbours = new Square[4];
@@ -275,6 +305,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean outOfBounds(Square sq) {
         if (sq.getHeightX() >= this.height - 1 || sq.getHeightX() <= 0
@@ -292,6 +323,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean canBeAPartOfPassageway(Square sq) {
         int n = 0;
@@ -369,6 +401,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public Square previousSquareInPassageway(Square sq) {
         Square previous = null;
@@ -390,6 +423,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean squareIsDeadEnd(Square sq) {
         int n = 0;
@@ -424,6 +458,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean willBeADeadEnd(Square sq) {
         int n = 0;
@@ -451,6 +486,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean isInTouchWithDoor(Square sq) {
         if (sq.getHeightX() >= 1 && sq.getHeightX() <= this.height - 1
@@ -501,6 +537,7 @@ public class Map {
      * This method counts how many rooms are connected to the passageway.
      *
      *
+     * @return 
      */
     public int numberOfSuccessfullyConnectedRooms() {
         int roomCount = 0;
@@ -533,6 +570,7 @@ public class Map {
      * wall/room/maze.
      *
      *
+     * @return 
      */
     public Square findMazeOrRoomSquare() {
         for (int i = 1; i < this.height; i++) {
@@ -550,6 +588,7 @@ public class Map {
      *
      *
      * @param sq Square
+     * @return 
      */
     public boolean valid(Square sq) {
         if (sq != null && !sq.getChecked() && (sq.getStatus().equals(SquareStatus.Maze)
