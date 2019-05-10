@@ -2,6 +2,7 @@
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import mavensimpledungeongenerator.Map;
+import mavensimpledungeongenerator.MyRandom;
 import mavensimpledungeongenerator.Room;
 import mavensimpledungeongenerator.Square;
 import org.junit.After;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
 public class MapTest {
 
     /**
-     *
+     * test.
      */
     @Test
     public void testMapShow() {
@@ -35,7 +36,7 @@ public class MapTest {
     }
 
     /**
-     *
+     *test.
      */
     @Test
     public void testRoomAndMazeAdded() {
@@ -71,11 +72,11 @@ public class MapTest {
         } else {
             assertEquals("+", ans1);
         }
-        
+
     }
 
     /**
-     *
+     *test.
      */
     @Test
     public void testDeadEndCheck() {
@@ -87,9 +88,9 @@ public class MapTest {
         boolean answer = map.squareIsDeadEnd(sq);
         assertEquals(true, answer);
     }
-    
+
     /**
-     *
+     *test.
      */
     @Test
     public void testNoRoomPlaced() {
@@ -101,16 +102,16 @@ public class MapTest {
     }
 
     /**
-     *
+     *test.
      */
     @Test
     public void testRemoveDeadEnd() {
-        Map map = new Map(8, 8);
+        Map map = new Map(10, 10);
         map.floodFill();
         map.removeDeadEnds();                       // after removing dead ends there shouldn't be any maze
         Square[][] squares = map.getMapSquares();
         Square deadEnd = null;
-        for (int i =  2; i < map.getMapHeight() - 1; i++) {
+        for (int i = 2; i < map.getMapHeight() - 1; i++) {
             for (int j = 2; j < map.getMapWidth() - 1; j++) {
                 if (!squares[i][j].getSymbol().equals("#")) {
                     deadEnd = squares[i][j];
@@ -119,15 +120,38 @@ public class MapTest {
         }
         assertEquals(null, deadEnd);
     }
-    
+
     /**
-     *
+     *test.
+     */
+    @Test
+    public void testLargeScaleMap() {
+        Map map = new Map(500, 500);
+        MyRandom random = new MyRandom();
+        for (int i = 0; i < 3000; i++) {    // placing rooms
+            Room room = new Room(new Square(random.nextInt(200) + 1, random.nextInt(200) + 1),
+                    random.nextInt((3 - 3 + 1)) + 3,
+                    random.nextInt((3 - 3 + 1)) + 3);
+            map.addRoom(room);
+        }
+        map.floodFill();
+        map.removeDeadEnds();                       // after removing dead ends there shouldn't be any maze
+        boolean ans = true;
+        int number = map.numberOfSuccessfullyConnectedRooms();
+        if (number < 2) {
+            ans = false;
+        }
+        assertEquals(true, ans);
+    }
+
+    /**
+     *test.
      */
     @Test
     public void testConnectedRoomCount() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        
+
         Map map = new Map(15, 15);
         Room room = new Room(new Square(4, 4), 1, 1);
         map.addRoom(room);
