@@ -32,14 +32,14 @@ Program and its performance was tested empirically. In tests both map height and
 
 Results:  
 
-map side size | time (ms) 
+map size | average time (ms) 
 ------ | ------
-250|106
-500|189
-750|204
-1000|535
-1250|1040
-1500|1060
-1750|1174
-2000|2385
+250x250|106
+500x500|189
+750x750|204
+1000x1000|535
+1250x1250|1040
+1500x1500|1060
+1750x1750|1174
+2000x2000|2385
 graph|![](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/graph.png)
