@@ -4,7 +4,7 @@
 
 Dungeon generator creates a map based on given parameters. Parameters are: map width, map height, min room size, max room size and 
 room placing attempts. All parameters should be integers. Program doesn't validate in any way users input and if given 
-parameters were invalid (string for instance) program will crush.
+parameters were invalid program will crush.
 
 ## How to start   
 
