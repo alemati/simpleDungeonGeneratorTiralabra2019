@@ -26,10 +26,10 @@ After room addition phase is over, program fills all remaining "open" (non room 
 using randomized iterative flood fill algorithm. That's how it works: first, we take one square from MyStack. If it can be turned into passageway, program does so. At the same time program checks if this new passageway square is attached to unconnected room and, if that's the case, places the door. After that we have 4 options to continue our passageway 
 (continue to left/right/up/down). Program randomizes order of those options using Fisher–Yates shuffle algorithm and pushes them into MyStack and cycle starts from the beginning. Flood fill stops when MyStack becomes empty. At this point we have map with rooms and passageway. 
 
-After that program removes all dead ends from the map replacing them by walls. Deadend is a square that is surrounded by at least 3 walls. After turning deadend to wall program checks all neighbours and if one of them is passageway square, program turns it into wall too. That process continues until there is no deadends anymore. After that program checks how many rooms on map are connected. At the end map will be showen in the console.
+After that program removes all dead ends from the map replacing them by walls. Deadend is a square that is surrounded by at least 3 walls. After turning deadend to wall program checks all neighbours and if one of them is passageway square, program turns it into wall too. That process continues until there is no deadends anymore. After that program checks how many rooms on map are connected. At the end map will be shown in the console.
 
 #### Used alghoritms and data structures  
-Program uses basic arrays, MyStask (selfmade Stack Data Structure) and MyRandom. Also randomized iterative flood fill algorithm is used for creating a passageway and Fisher–Yates shuffle alghoritm is used for randomizing squares neighbours while making passageway.
+Program uses basic arrays, MyStask (selfmade Stack Data Structure) and MyRandom. Also randomized iterative flood fill algorithm is used for creating a passageway and Fisher–Yates shuffle alghoritm is used for randomizing squares while making passageway.
 
 #### Achived time and space complexity 
 [Test document](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/testDocument.md)   
