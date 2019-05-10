@@ -12,7 +12,10 @@ You can run dungeon generator in NetBeans or in console using jar file.
 
 #### NetBeans
 
-Download project to your computer (for instance command: git clone git@github.com:alemati/simpleDungeonGeneratorTiralabra2019.git) 
+Download project to your computer 
+```
+git clone git@github.com:alemati/simpleDungeonGeneratorTiralabra2019.git
+``` 
 and open it in NetBeans. While being in NetBeans trigger program by cliking on "Run project" button. After that program 
 will ask you parameters and will print map in the console. If map doesn't look right in console make sure to zoom out a little.
 
