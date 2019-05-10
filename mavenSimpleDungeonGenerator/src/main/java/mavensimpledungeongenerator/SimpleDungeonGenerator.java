@@ -2,13 +2,21 @@ package mavensimpledungeongenerator;
 
 import java.util.Scanner;
 
+/**
+ * Program creates 2-dimensional dungeon map.
+ *
+ *
+ */
 public class SimpleDungeonGenerator {
 
+    /**
+     *@param args
+     */
     public static void main(String[] args) {
-        
+
         if (args.length == 0) {                                 // If program was triggered by jar file without parameters
             Scanner user = new Scanner(System.in);              // or was started in NetBeans, program should collect info first
-            
+
             System.out.println("Hello! Give map parameters:");  // gathering information
             System.out.print("Height: ");
             int mapHeight = Integer.parseInt(user.nextLine());
@@ -20,7 +28,7 @@ public class SimpleDungeonGenerator {
             int roomSizeMax = Integer.parseInt(user.nextLine());
             System.out.print("Room placing attempts: ");
             int placeAttempts = Integer.parseInt(user.nextLine());
-            advancedSimulation(mapHeight, mapWidth, roomSizeMax, roomSizeMin, placeAttempts);
+            advancedSimulation(mapHeight, mapWidth, roomSizeMin, roomSizeMax, placeAttempts);
         } else {
             int mapHeight = Integer.parseInt(args[0]);          // if code was triggered by jar file with parameters
             int mapWidth = Integer.parseInt(args[1]);           // program uses them
@@ -46,21 +54,25 @@ public class SimpleDungeonGenerator {
         int roomSizeMin = minSizeRoom;
         int roomSizeMax = maxSizeRoom;
         int placeAttemps = attempts;
-        MyRandom random = new MyRandom();
-        for (int i = 0; i < placeAttemps; i++) {    // placing rooms
-            Room room = new Room(new Square(random.nextInt(height) + 1, random.nextInt(width) + 1),
-                    random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin,
-                    random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin);
-            map.addRoom(room);
+        if (roomSizeMax < roomSizeMin) {
+            System.out.println("It seems like you gave invalid parameters. Try again");
+        } else {
+            MyRandom random = new MyRandom();
+            for (int i = 0; i < placeAttemps; i++) {    // placing rooms
+                Room room = new Room(new Square(random.nextInt(height) + 1, random.nextInt(width) + 1),
+                        random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin,
+                        random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin);
+                map.addRoom(room);
+            }
+            map.floodFill();
+            map.removeDeadEnds();
+            int roomsPlaced = map.getMapRoomsPlaced();
+            int connectedRooms = map.numberOfSuccessfullyConnectedRooms();
+            long after = System.currentTimeMillis();
+            map.showMap();
+            System.out.println("There is " + roomsPlaced + " rooms on the map and " + connectedRooms + " of them are connected.");
+            System.out.println("Generation took " + (after - before) + " ms");
         }
-        map.floodFill();
-        map.removeDeadEnds();
-        int roomsPlaced = map.getMapRoomsPlaced();
-        int connectedRooms = map.numberOfSuccessfullyConnectedRooms();
-        long after = System.currentTimeMillis();
-        map.showMap();
-        System.out.println("There is " + roomsPlaced + " rooms on the map and " + connectedRooms + " of them are connected.");
-        System.out.println("Generation took " + (after - before) + " ms");
     }
 
     /**
