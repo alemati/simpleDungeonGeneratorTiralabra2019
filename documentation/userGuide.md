@@ -18,7 +18,7 @@ will ask you parameters and will print map in the console. If map doesn't look r
 
 #### Console
 
-[Download jar file](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/releases/tag/v1.1). After downloading user may run program in two different ways. User can either run jar file without parameters 
+[Download jar file](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/releases/tag/v1.2). After downloading user may run program in two different ways. User can either run jar file without parameters 
 (then program will ask you to give them) 
 ```
 java -jar mavenSimpleDungeonGenerator-1.0-SNAPSHOT.jar
