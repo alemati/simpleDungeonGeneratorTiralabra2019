@@ -75,6 +75,15 @@ public class MapTest {
         boolean answer = map.squareIsDeadEnd(sq);
         assertEquals(true, answer);
     }
+    
+    @Test
+    public void testNoRoomPlaced() {
+        Map map = new Map(5, 5);
+        map.floodFill();
+        map.removeDeadEnds();
+        int ans = map.getMapRoomsPlaced();
+        assertEquals(0, ans);
+    }
 
     @Test
     public void testRemoveDeadEnd() {

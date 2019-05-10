@@ -36,7 +36,7 @@ public class Map {
     }
 
     /**
-     * This method initialize empty map.
+     * This method initializes empty map.
      *
      *
      */
@@ -63,19 +63,6 @@ public class Map {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 System.out.print(this.squares[i][j].getSymbol());
-            }
-            System.out.println("");
-        }
-    }
-
-    /**
-     * This method prints colored dungeon map in console.
-     *
-     */
-    public void showColoredMap() {
-        for (int i = 0; i < this.height; i++) {
-            for (int j = 0; j < this.width; j++) {
-                System.out.print(this.squares[i][j].getColoredSymbol());
             }
             System.out.println("");
         }

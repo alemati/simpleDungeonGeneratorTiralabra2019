@@ -6,17 +6,6 @@ enum SquareStatus {
 
 public class Square {
 
-    /*Strings to desplay colors*/
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-
     private int HeightX;
     private int WidthY;
     private Boolean isConnected;
@@ -65,22 +54,6 @@ public class Square {
             return " ";
         }
         return "#"; // this one has to be "Open" -> #
-    }
-    
-    public String getColoredSymbol() {
-        if (this.isParentRoomSq == true && this.checked == false) {
-            return "█";
-        }
-        if (this.status.equals(SquareStatus.Wall)) {
-            return RED + "#";
-        } else if (this.status.equals(SquareStatus.Maze)) {
-            return GREEN + " ";
-        } else if (this.status.equals(SquareStatus.Door)) {
-            return GREEN + "+";
-        } else if (this.status.equals(SquareStatus.Room)) {
-            return GREEN + " ";
-        }
-        return BLACK + "#"; // this one has to be "Open" -> #
     }
 
     public boolean isConnectedToMaze() {

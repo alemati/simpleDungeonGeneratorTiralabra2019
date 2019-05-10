@@ -23,7 +23,7 @@ public class MyRandom {
     }
 
     /**
-     * This method returns random numder between 0 - 32767.
+     * This method returns random positive number.
      *
      * 
      */
