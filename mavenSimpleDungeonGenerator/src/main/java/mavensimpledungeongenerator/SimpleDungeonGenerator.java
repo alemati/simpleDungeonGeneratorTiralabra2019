@@ -3,14 +3,14 @@ package mavensimpledungeongenerator;
 import java.util.Scanner;
 
 /**
- * Program creates 2-dimensional dungeon map.
  *
- *
+ * @author AM
  */
 public class SimpleDungeonGenerator {
 
     /**
-     *@param args
+     *
+     * @param args
      */
     public static void main(String[] args) {
 
