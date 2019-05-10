@@ -36,7 +36,7 @@ Program uses basic arrays, MyStask (selfmade Stack Data Structure) and MyRandom.
 
 Time that program requires to create a map depends on given parameters. Usually phase that is filling map with passageway uses more time then any other and it demands esspacily a lot of time when there is a lot of open space on the map. But if user will put absurd number of room placing attempts (in an attempt to make map as dense as possible) then it can negatively affect on performance even more.
 
-Right now, with small amount of square on the map (less then 1700 on  one side, 1700*1700=3062500 squares) program seems to work in O(n) range. 
+Right now, with small amount of square on the map (less then 1700 on  one side, 1700*1700=2890000 squares) program seems to work in O(n) range. 
 
 Space complexity meets expectation of O(n) where n is total number of squares on map. Program creates only one map and doesn't make any duplicates of it. The most space heavy part of the program is flood fill alghoritm because it uses MyStack and in worst case scenario every square can be pushed into MyStack making size of it equal to n. But even then it cannot push more then n squares into my stack.
 
