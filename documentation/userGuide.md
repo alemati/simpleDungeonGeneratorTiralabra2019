@@ -21,11 +21,11 @@ will ask you parameters and will print map in the console. If map doesn't look r
 [Download jar file](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/releases/tag/v1.1). After downloading user may run program in two different ways. User can either run jar file without parameters 
 (then program will ask you to give them) 
 ```
-mavenSimpleDungeonGenerator-1.0-SNAPSHOT.jar
+java -jar mavenSimpleDungeonGenerator-1.0-SNAPSHOT.jar
 ```   
 or run jar file with parameters (that way program won't ask you to give them second time)  
 ```
-mavenSimpleDungeonGenerator-1.0-SNAPSHOT.jar width height minRoomSize mazRoomSize attempts
+java -jar mavenSimpleDungeonGenerator-1.0-SNAPSHOT.jar width height minRoomSize mazRoomSize attempts
 ```
 If map doesn't look right in console make sure to zoom out a little bit.
 
