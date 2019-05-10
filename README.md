@@ -1,5 +1,7 @@
 # simpleDungeonGeneratorTiralabra2019  
 
+[Jar file](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/releases/tag/v1.2)
+
 [User guide](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/userGuide.md) 
 
 [Project specifications](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/specifications.md) 
