@@ -39,6 +39,9 @@ public class MyRandom {
      * @param max int
      */
     public int nextInt(int max) {
+        if (max <= 0) {
+            max = 1;
+        }
         return (int) (nextInt() % max);
     }
 

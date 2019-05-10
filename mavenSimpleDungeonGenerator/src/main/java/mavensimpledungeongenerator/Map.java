@@ -1,7 +1,5 @@
 package mavensimpledungeongenerator;
 
-import java.util.Random;
-
 public class Map {
 
     private int width;
@@ -18,7 +16,7 @@ public class Map {
         this.roomsPlaced = 0;
         mapInit();
     }
-    
+
     public int getMapRoomsPlaced() {
         return this.roomsPlaced;
     }
@@ -224,12 +222,12 @@ public class Map {
                     doorSquare.setStatus(SquareStatus.Door);
                 }
 
-                if (willBeADeadEnd(square)) {
-                    this.deadEnds.push(square);
+                if (willBeADeadEnd(square)) {               // program keeps track of all dead ends 
+                    this.deadEnds.push(square);             // in order to delete them quickly later on
                 }
 
                 Square[] neighbours = neighbourArray(square);   // pushing all valid neighbour squares into myStack
-                for (int i = 0; i < 4; i++) {                   // for further passageway
+                for (int i = 0; i < 4; i++) {                   // for continuing building a passageway
                     if (neighbours[i] != null) {
                         myStack.push(neighbours[i]);
                     }
@@ -341,7 +339,7 @@ public class Map {
         }
         return null;
     }
-
+    
     /**
      * This method is an implementation of Fisher–Yates shuffle algorithm.
      * Shuffles array.
@@ -350,16 +348,21 @@ public class Map {
      * @param ar Square[]
      */
     static void shuffleArray(Square[] ar) {
-        Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            // Simple swap
-            Square a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-        }
+        int n = 4;
+        for (int i = n-1; i > 0; i--) { 
+              
+            // Pick a random index from 0 to i 
+            long index = System.nanoTime();
+            index = index % (i + 1);
+            int intIndex = (int) index;
+              
+            // Swap ar[i] with the element at random index 
+            Square temp = ar[i]; 
+            ar[i] = ar[intIndex]; 
+            ar[intIndex] = temp; 
+        } 
     }
-
+    
     /**
      * This method checks all neighbour squares of given passageway square and
      * if one of them is a part of passageway, method returns it.
@@ -441,7 +444,7 @@ public class Map {
         }
         return true;
     }
-    
+
     /**
      * This method checks if square is in touch with door.
      *
@@ -495,7 +498,7 @@ public class Map {
     }
 
     /**
-     * This method tells how many rooms there is on created map and how many of them are connected to passageway.
+     * This method counts how many rooms are connected to the passageway.
      *
      *
      */

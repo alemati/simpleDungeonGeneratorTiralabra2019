@@ -6,24 +6,24 @@ public class SimpleDungeonGenerator {
 
     public static void main(String[] args) {
         
-        if (args.length == 0) {                                 // if code isn't triggered by jar file (args.length == 0)
-            Scanner user = new Scanner(System.in);              // program should gather information first
+        if (args.length == 0) {                                 // If program was triggered by jar file without parameters
+            Scanner user = new Scanner(System.in);              // or was started in NetBeans, program should collect info first
             
             System.out.println("Hello! Give map parameters:");  // gathering information
             System.out.print("Height: ");
             int mapHeight = Integer.parseInt(user.nextLine());
             System.out.print("Width: ");
             int mapWidth = Integer.parseInt(user.nextLine());
-            System.out.print("Minimal room size: ");
+            System.out.print("Min room size: ");
             int roomSizeMin = Integer.parseInt(user.nextLine());
-            System.out.print("Maximal room size: ");
+            System.out.print("Max room size: ");
             int roomSizeMax = Integer.parseInt(user.nextLine());
             System.out.print("Room placing attempts: ");
             int placeAttempts = Integer.parseInt(user.nextLine());
             advancedSimulation(mapHeight, mapWidth, roomSizeMax, roomSizeMin, placeAttempts);
         } else {
-            int mapHeight = Integer.parseInt(args[0]);          // if code was triggered by jar
-            int mapWidth = Integer.parseInt(args[1]);           // program uses given parameters
+            int mapHeight = Integer.parseInt(args[0]);          // if code was triggered by jar file with parameters
+            int mapWidth = Integer.parseInt(args[1]);           // program uses them
             int roomSizeMin = Integer.parseInt(args[2]);
             int roomSizeMax = Integer.parseInt(args[3]);
             int placeAttempts = Integer.parseInt(args[4]);
@@ -49,8 +49,8 @@ public class SimpleDungeonGenerator {
         MyRandom random = new MyRandom();
         for (int i = 0; i < placeAttemps; i++) {    // placing rooms
             Room room = new Room(new Square(random.nextInt(height) + 1, random.nextInt(width) + 1),
-                    random.nextInt((roomSizeMax - roomSizeMin + 2)) + roomSizeMin,
-                    random.nextInt((roomSizeMax - roomSizeMin + 2)) + roomSizeMin);
+                    random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin,
+                    random.nextInt((roomSizeMax - roomSizeMin + 1)) + roomSizeMin);
             map.addRoom(room);
         }
         map.floodFill();
