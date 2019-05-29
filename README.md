@@ -12,6 +12,8 @@
 
 [JavaDocs](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/tree/master/documentation/apidocs)
 
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
 [Week 6 report](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/weekReports/week6.md)   
 [Week 5 report](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/weekReports/week5.md)  
 [Week 4 report](https://github.com/alemati/simpleDungeonGeneratorTiralabra2019/blob/master/documentation/weekReports/week4.md)   
